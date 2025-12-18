@@ -5,6 +5,8 @@
 <title>Street0 Code</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+
 <style>
 :root {
   --bg: #0b0b0b;
@@ -14,8 +16,12 @@
   --muted: #888;
 }
 
-* {
-  box-sizing: border-box;
+.light {
+  --bg: #f4f4f4;
+  --panel: #ffffff;
+  --border: #ddd;
+  --text: #111;
+  --muted: #555;
 }
 
 body {
@@ -23,10 +29,21 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: monospace;
+  transition: background 0.3s, color 0.3s;
+}
+
+body.sakura {
+  background-image: url("sakurablured.png");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+body.old-cursor {
+  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAPCAYAAADJViUEAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIElEQVQokWP8////fwYsgAmGQjBgkBGIMYyGgQEA8P8LCqQn2W8AAAAASUVORK5CYII="), auto;
 }
 
 header {
-  padding: 24px;
+  padding: 20px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -39,13 +56,16 @@ nav {
   margin-top: 12px;
 }
 
-nav a {
+nav button {
+  background: none;
+  border: none;
   color: var(--text);
   margin-right: 16px;
-  text-decoration: none;
+  cursor: pointer;
+  font-family: monospace;
 }
 
-nav a:hover {
+nav button.active {
   text-decoration: underline;
 }
 
@@ -53,9 +73,8 @@ main {
   padding: 24px;
 }
 
-.section-title {
-  margin-bottom: 16px;
-  font-size: 18px;
+.hidden {
+  display: none;
 }
 
 .ascii-block {
@@ -68,20 +87,19 @@ main {
 
 .ascii-block pre {
   margin: 0;
-  overflow-x: auto;
   white-space: pre;
+  overflow-x: auto;
 }
 
 .copy-btn {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background: transparent;
-  color: var(--muted);
+  top: 10px;
+  right: 10px;
+  background: none;
   border: 1px solid var(--border);
+  color: var(--muted);
   padding: 4px 10px;
   cursor: pointer;
-  font-family: monospace;
 }
 
 .copy-btn:hover {
@@ -89,19 +107,48 @@ main {
   border-color: var(--text);
 }
 
-footer {
-  padding: 16px 24px;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 12px;
+.setting {
+  margin-bottom: 16px;
+}
+
+.setting button {
+  margin-left: 10px;
 }
 </style>
 
 <script>
-function copyAscii(id) {
-  const text = document.getElementById(id).innerText;
-  navigator.clipboard.writeText(text);
+function showTab(tab) {
+  document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
+  document.getElementById(tab).classList.remove("hidden");
+
+  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+  document.getElementById("btn-" + tab).classList.add("active");
 }
+
+function copyAscii(id) {
+  navigator.clipboard.writeText(document.getElementById(id).innerText);
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("light");
+  localStorage.theme = document.body.classList.contains("light") ? "light" : "dark";
+}
+
+function toggleCursor() {
+  document.body.classList.toggle("old-cursor");
+  localStorage.cursor = document.body.classList.contains("old-cursor");
+}
+
+function toggleSakura() {
+  document.body.classList.toggle("sakura");
+  localStorage.sakura = document.body.classList.contains("sakura");
+}
+
+window.onload = () => {
+  if (localStorage.theme === "light") document.body.classList.add("light");
+  if (localStorage.cursor === "true") document.body.classList.add("old-cursor");
+  if (localStorage.sakura === "true") document.body.classList.add("sakura");
+};
 </script>
 </head>
 
@@ -110,14 +157,14 @@ function copyAscii(id) {
 <header>
   <h1>Street0 Code</h1>
   <nav>
-    <a href="#ascii">ASCII</a>
+    <button id="btn-ascii" class="active" onclick="showTab('ascii')">ASCII</button>
+    <button id="btn-settings" onclick="showTab('settings')">Settings</button>
   </nav>
 </header>
 
-<main id="ascii">
-  <div class="section-title">ASCII Collection</div>
+<main>
 
-  <!-- ASCII 1 -->
+<section id="ascii">
   <div class="ascii-block">
     <button class="copy-btn" onclick="copyAscii('a1')">Copy</button>
     <pre id="a1">
@@ -139,70 +186,27 @@ _______|___|_______
     </pre>
   </div>
 
-  <!-- ASCII 2 -->
-  <div class="ascii-block">
-    <button class="copy-btn" onclick="copyAscii('a2')">Copy</button>
-    <pre id="a2">
-                                                _
-                  ___                          (_)
-                _/XXX\
- _             /XXXXXX\_                                    __
- X\__    __   /X XXXX XX\                          _       /XX\__      ___
-     \__/  \_/__       \ \                       _/X\__   /XX XXX\____/XXX\
-   \  ___   \/  \_      \ \               __   _/      \_/  _/  -   __  -  \__/
-  ___/   \__/   \ \__     \\__           /  \_//  _ _ \  \     __  /  \____//
- /  __    \  /     \ \_   _//_\___     _/    //           \___/  \/     __/
- __/_______\________\__\_/________\_ _/_____/_____________/_______\____/_______
-                                   /|\
-                                  / | \
-                                 /  |  \
-                                /   |   \
-                               /    |    \
-                              /     |     \
-                             /      |      \
-                            /       |       \
-                           /        |        \
-                          /         |         \
-    </pre>
+  <!-- інші ASCII вставляєш ТУТ за тим самим шаблоном -->
+</section>
+
+<section id="settings" class="hidden">
+  <div class="setting">
+    Theme:
+    <button onclick="toggleTheme()">Toggle</button>
   </div>
 
-  <!-- ASCII 3 -->
-  <div class="ascii-block">
-    <button class="copy-btn" onclick="copyAscii('a3')">Copy</button>
-    <pre id="a3">
-@             _________
- \____       /         \
- /    \     /   ____    \
- \_    \   /   /    \    \
-   \    \ (    \__/  )    )
-    \    \_\ \______/    /
-     \      \           /___
-      \______\_________/____"-_
-    </pre>
+  <div class="setting">
+    Old cursor:
+    <button onclick="toggleCursor()">On / Off</button>
   </div>
 
-  <!-- ASCII 4 -->
-  <div class="ascii-block">
-    <button class="copy-btn" onclick="copyAscii('a4')">Copy</button>
-    <pre id="a4">
-            oooooooooooooooooooooooooooooooooooooooooooooo
-   ooo$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ooo
-  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
- o$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$o
- $$$$$   $$$"    "$$$$$"    "$     $     $  "$  $$$$$"    "$  "$  $$$
- $$$$"   "$$  $$oo$$$$$  $$oo$  $$$$  $$$$   "  $$$$$  $$  $   "  $$$
-o$$$$  $  $$o    "$$$$$o    "$    $$     $      $$$$$  $$  $      $$$o
-$$$$   o   $""$$  $$$$$""$$  $  $$$$  $$$$  o   $$$$$  $$  $  o   $$$$
-$$$$  $$$  $o    o$$$$$o    o$     $     $  $o  $$$$$o    o$  $o  $$$$
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    </pre>
+  <div class="setting">
+    Sakura background:
+    <button onclick="toggleSakura()">On / Off</button>
   </div>
+</section>
 
 </main>
-
-<footer>
-  © Street0 Code
-</footer>
 
 </body>
 </html>
