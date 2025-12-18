@@ -1,4 +1,2 @@
-/*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*\
-|.=0      Street0 Website     0=.|
-|.=0       Made by Swe1h      0=.|
-\*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*/
+Swe1h code website. 
+In this website i collect`s my code and software.
