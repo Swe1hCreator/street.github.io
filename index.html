@@ -109,29 +109,111 @@ section {
 }
 
 /* ================== ASCII BLOCK ================== */
-.ascii-block {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 18px;
-  margin-bottom: 28px;
-  position: relative;
-  backdrop-filter: blur(10px);
-  transition:
-    background 0.4s ease,
-    border 0.4s ease,
-    transform 0.25s ease;
-}
+<section id="ascii">
 
-.ascii-block:hover {
-  transform: translateY(-2px);
-}
+<!-- ASCII 1 -->
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a1')">Copy</button>
+<pre id="a1">
+        /\
+       /  \
+       \/\/
+        ~|
+       !~~-!
+       |` ,!
+       |'` |
+       |   |
+       |   |
+       |   |
+       |   |
+       |   |
+_______|___|_______
+\                 /
+ \_______________/
+</pre>
+</div>
 
-.ascii-block pre {
-  margin: 0;
-  white-space: pre;
-  overflow-x: auto;
-}
+<!-- ASCII 2 -->
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a2')">Copy</button>
+<pre id="a2">
+                                                _
+                  ___                          (_)
+                _/XXX\
+ _             /XXXXXX\_                                    __
+ X\__    __   /X XXXX XX\                          _       /XX\__      ___
+     \__/  \_/__       \ \                       _/X\__   /XX XXX\____/XXX\
+   \  ___   \/  \_      \ \               __   _/      \_/  _/  -   __  -  \__/
+  ___/   \__/   \ \__     \\__           /  \_//  _ _ \  \     __  /  \____//
+ /  __    \  /     \ \_   _//_\___     _/    //           \___/  \/     __/
+ __/_______\________\__\_/________\_ _/_____/_____________/_______\____/_______
+                                   /|\
+                                  / | \
+                                 /  |  \
+                                /   |   \
+                               /    |    \
+                              /     |     \
+                             /      |      \
+                            /       |       \
+                           /        |        \
+                          /         |         \
+</pre>
+</div>
+
+<!-- ASCII 3 -->
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a3')">Copy</button>
+<pre id="a3">
+@             _________
+ \____       /         \
+ /    \     /   ____    \
+ \_    \   /   /    \    \
+   \    \ (    \__/  )    )
+    \    \_\ \______/    /
+     \      \           /___
+      \______\_________/____"-_
+</pre>
+</div>
+
+<!-- ASCII 4 -->
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a4')">Copy</button>
+<pre id="a4">
+                                |
+                                |
+                               _|_
+                              /___\
+                             /_____\
+\___________________________\       /___________________________/
+  -----------|------|--------\_____/--------|------|-----------'
+            ( )    ( )     O|OOo|oOO|O     ( )    ( )
+</pre>
+</div>
+
+<!-- ASCII 5 -->
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a5')">Copy</button>
+<pre id="a5">
+               .
+              /=\\
+             /===\ \
+            /=====\' \
+           /=======\'' \
+          /=========\ ' '\
+         /===========\''   \
+        /=============\ ' '  \
+       /===============\   ''  \
+      /=================\' ' ' ' \
+     /===================\' ' '  ' \
+    /=====================\' '   ' ' \
+   /=======================\  '   ' /
+  /=========================\   ' /
+ /===========================\'  /
+/=============================\/
+</pre>
+</div>
+
+</section>
 
 /* ================== COPY BUTTON ================== */
 .copy-btn {
