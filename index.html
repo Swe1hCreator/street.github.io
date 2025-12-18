@@ -29,17 +29,12 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: monospace;
-  transition: background 0.3s, color 0.3s;
 }
 
 body.sakura {
   background-image: url("sakurablured.png");
   background-size: cover;
   background-attachment: fixed;
-}
-
-body.old-cursor {
-  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAPCAYAAADJViUEAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIElEQVQokWP8////fwYsgAmGQjBgkBGIMYyGgQEA8P8LCqQn2W8AAAAASUVORK5CYII="), auto;
 }
 
 header {
@@ -134,11 +129,6 @@ function toggleTheme() {
   localStorage.theme = document.body.classList.contains("light") ? "light" : "dark";
 }
 
-function toggleCursor() {
-  document.body.classList.toggle("old-cursor");
-  localStorage.cursor = document.body.classList.contains("old-cursor");
-}
-
 function toggleSakura() {
   document.body.classList.toggle("sakura");
   localStorage.sakura = document.body.classList.contains("sakura");
@@ -146,7 +136,6 @@ function toggleSakura() {
 
 window.onload = () => {
   if (localStorage.theme === "light") document.body.classList.add("light");
-  if (localStorage.cursor === "true") document.body.classList.add("old-cursor");
   if (localStorage.sakura === "true") document.body.classList.add("sakura");
 };
 </script>
@@ -165,9 +154,11 @@ window.onload = () => {
 <main>
 
 <section id="ascii">
-  <div class="ascii-block">
-    <button class="copy-btn" onclick="copyAscii('a1')">Copy</button>
-    <pre id="a1">
+
+<!-- ASCII 1 -->
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a1')">Copy</button>
+<pre id="a1">
         /\
        /  \
        \/\/
@@ -183,21 +174,95 @@ window.onload = () => {
 _______|___|_______
 \                 /
  \_______________/
-    </pre>
-  </div>
+</pre>
+</div>
 
-  <!-- інші ASCII вставляєш ТУТ за тим самим шаблоном -->
+<!-- ASCII 2 -->
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a2')">Copy</button>
+<pre id="a2">
+                                                _
+                  ___                          (_)
+                _/XXX\
+ _             /XXXXXX\_                                    __
+ X\__    __   /X XXXX XX\                          _       /XX\__      ___
+     \__/  \_/__       \ \                       _/X\__   /XX XXX\____/XXX\
+   \  ___   \/  \_      \ \               __   _/      \_/  _/  -   __  -  \__/
+  ___/   \__/   \ \__     \\__           /  \_//  _ _ \  \     __  /  \____//
+ /  __    \  /     \ \_   _//_\___     _/    //           \___/  \/     __/
+ __/_______\________\__\_/________\_ _/_____/_____________/_______\____/_______
+                                   /|\
+                                  / | \
+                                 /  |  \
+                                /   |   \
+                               /    |    \
+                              /     |     \
+                             /      |      \
+                            /       |       \
+                           /        |        \
+                          /         |         \
+</pre>
+</div>
+
+<!-- ASCII 3 -->
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a3')">Copy</button>
+<pre id="a3">
+@             _________
+ \____       /         \
+ /    \     /   ____    \
+ \_    \   /   /    \    \
+   \    \ (    \__/  )    )
+    \    \_\ \______/    /
+     \      \           /___
+      \______\_________/____"-_
+</pre>
+</div>
+
+<!-- ASCII 4 -->
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a4')">Copy</button>
+<pre id="a4">
+                                |
+                                |
+                               _|_
+                              /___\
+                             /_____\
+\___________________________\       /___________________________/
+  -----------|------|--------\_____/--------|------|-----------'
+            ( )    ( )     O|OOo|oOO|O     ( )    ( )
+</pre>
+</div>
+
+<!-- ASCII 5 -->
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a5')">Copy</button>
+<pre id="a5">
+               .
+              /=\\
+             /===\ \
+            /=====\' \
+           /=======\'' \
+          /=========\ ' '\
+         /===========\''   \
+        /=============\ ' '  \
+       /===============\   ''  \
+      /=================\' ' ' ' \
+     /===================\' ' '  ' \
+    /=====================\' '   ' ' \
+   /=======================\  '   ' /
+  /=========================\   ' /
+ /===========================\'  /
+/=============================\/
+</pre>
+</div>
+
 </section>
 
 <section id="settings" class="hidden">
   <div class="setting">
     Theme:
     <button onclick="toggleTheme()">Toggle</button>
-  </div>
-
-  <div class="setting">
-    Old cursor:
-    <button onclick="toggleCursor()">On / Off</button>
   </div>
 
   <div class="setting">
