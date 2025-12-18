@@ -7,11 +7,10 @@
 <link rel="icon" href="favicon.ico">
 
 <style>
-/* ================== THEME VARIABLES ================== */
 :root {
   --bg: #0b0b0b;
   --bg-soft: #0f0f0f;
-  --panel: rgba(20,20,20,0.85);
+  --panel: rgba(20,20,20,0.9);
   --border: rgba(255,255,255,0.08);
   --text: #eaeaea;
   --muted: #9a9a9a;
@@ -21,20 +20,15 @@
 body.light {
   --bg: #f3f4f6;
   --bg-soft: #ffffff;
-  --panel: rgba(255,255,255,0.85);
-  --border: rgba(0,0,0,0.08);
+  --panel: rgba(255,255,255,0.9);
+  --border: rgba(0,0,0,0.1);
   --text: #111;
   --muted: #555;
   --accent: #2563eb;
 }
 
-/* ================== GLOBAL ================== */
 * {
   box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
 }
 
 body {
@@ -42,12 +36,10 @@ body {
   background: linear-gradient(180deg, var(--bg), var(--bg-soft));
   color: var(--text);
   font-family: monospace;
-  transition:
-    background 0.6s ease,
-    color 0.4s ease;
+  transition: background 0.6s ease, color 0.4s ease;
 }
 
-/* Sakura */
+/* Sakura background */
 body.sakura::before {
   content: "";
   position: fixed;
@@ -61,11 +53,10 @@ body.sakura-active::before {
   opacity: 0.25;
 }
 
-/* ================== HEADER ================== */
 header {
   padding: 24px;
-  backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(6px);
 }
 
 h1 {
@@ -93,129 +84,42 @@ nav button:hover {
   color: var(--text);
 }
 
-/* ================== MAIN ================== */
 main {
   padding: 28px;
   max-width: 1100px;
   margin: auto;
 }
 
-section {
-  animation: fadeIn 0.4s ease;
-}
-
 .hidden {
   display: none;
 }
 
-/* ================== ASCII BLOCK ================== */
-<section id="ascii">
+section {
+  animation: fadeIn 0.4s ease;
+}
 
-<!-- ASCII 1 -->
-<div class="ascii-block">
-<button class="copy-btn" onclick="copyAscii('a1')">Copy</button>
-<pre id="a1">
-        /\
-       /  \
-       \/\/
-        ~|
-       !~~-!
-       |` ,!
-       |'` |
-       |   |
-       |   |
-       |   |
-       |   |
-       |   |
-_______|___|_______
-\                 /
- \_______________/
-</pre>
-</div>
+/* ASCII block */
+.ascii-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 28px;
+  position: relative;
+  backdrop-filter: blur(10px);
+  transition: transform 0.25s ease;
+}
 
-<!-- ASCII 2 -->
-<div class="ascii-block">
-<button class="copy-btn" onclick="copyAscii('a2')">Copy</button>
-<pre id="a2">
-                                                _
-                  ___                          (_)
-                _/XXX\
- _             /XXXXXX\_                                    __
- X\__    __   /X XXXX XX\                          _       /XX\__      ___
-     \__/  \_/__       \ \                       _/X\__   /XX XXX\____/XXX\
-   \  ___   \/  \_      \ \               __   _/      \_/  _/  -   __  -  \__/
-  ___/   \__/   \ \__     \\__           /  \_//  _ _ \  \     __  /  \____//
- /  __    \  /     \ \_   _//_\___     _/    //           \___/  \/     __/
- __/_______\________\__\_/________\_ _/_____/_____________/_______\____/_______
-                                   /|\
-                                  / | \
-                                 /  |  \
-                                /   |   \
-                               /    |    \
-                              /     |     \
-                             /      |      \
-                            /       |       \
-                           /        |        \
-                          /         |         \
-</pre>
-</div>
+.ascii-block:hover {
+  transform: translateY(-2px);
+}
 
-<!-- ASCII 3 -->
-<div class="ascii-block">
-<button class="copy-btn" onclick="copyAscii('a3')">Copy</button>
-<pre id="a3">
-@             _________
- \____       /         \
- /    \     /   ____    \
- \_    \   /   /    \    \
-   \    \ (    \__/  )    )
-    \    \_\ \______/    /
-     \      \           /___
-      \______\_________/____"-_
-</pre>
-</div>
+.ascii-block pre {
+  margin: 0;
+  white-space: pre;
+  overflow-x: auto;
+}
 
-<!-- ASCII 4 -->
-<div class="ascii-block">
-<button class="copy-btn" onclick="copyAscii('a4')">Copy</button>
-<pre id="a4">
-                                |
-                                |
-                               _|_
-                              /___\
-                             /_____\
-\___________________________\       /___________________________/
-  -----------|------|--------\_____/--------|------|-----------'
-            ( )    ( )     O|OOo|oOO|O     ( )    ( )
-</pre>
-</div>
-
-<!-- ASCII 5 -->
-<div class="ascii-block">
-<button class="copy-btn" onclick="copyAscii('a5')">Copy</button>
-<pre id="a5">
-               .
-              /=\\
-             /===\ \
-            /=====\' \
-           /=======\'' \
-          /=========\ ' '\
-         /===========\''   \
-        /=============\ ' '  \
-       /===============\   ''  \
-      /=================\' ' ' ' \
-     /===================\' ' '  ' \
-    /=====================\' '   ' ' \
-   /=======================\  '   ' /
-  /=========================\   ' /
- /===========================\'  /
-/=============================\/
-</pre>
-</div>
-
-</section>
-
-/* ================== COPY BUTTON ================== */
 .copy-btn {
   position: absolute;
   top: 12px;
@@ -226,19 +130,15 @@ _______|___|_______
   padding: 5px 12px;
   border-radius: 6px;
   cursor: pointer;
-  transition:
-    color 0.3s ease,
-    border 0.3s ease,
-    background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .copy-btn:hover {
-  color: var(--text);
+  color: var(--accent);
   border-color: var(--accent);
-  background: rgba(255,255,255,0.04);
 }
 
-/* ================== SETTINGS ================== */
+/* Settings */
 .setting {
   margin-bottom: 18px;
 }
@@ -252,7 +152,6 @@ _______|___|_______
   color: var(--text);
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .setting button:hover {
@@ -260,10 +159,9 @@ _______|___|_______
   color: var(--accent);
 }
 
-/* ================== ANIM ================== */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 
@@ -313,7 +211,104 @@ window.onload = () => {
 <main>
 
 <section id="ascii">
-  <!-- ASCII blocks залишаються ТІ САМІ, що ми вже додали -->
+
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a1')">Copy</button>
+<pre id="a1">
+        /\
+       /  \
+       \/\/
+        ~|
+       !~~-!
+       |` ,!
+       |'` |
+       |   |
+       |   |
+       |   |
+       |   |
+       |   |
+_______|___|_______
+\                 /
+ \_______________/
+</pre>
+</div>
+
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a2')">Copy</button>
+<pre id="a2">
+                                                _
+                  ___                          (_)
+                _/XXX\
+ _             /XXXXXX\_                                    __
+ X\__    __   /X XXXX XX\                          _       /XX\__      ___
+     \__/  \_/__       \ \                       _/X\__   /XX XXX\____/XXX\
+   \  ___   \/  \_      \ \               __   _/      \_/  _/  -   __  -  \__/
+  ___/   \__/   \ \__     \\__           /  \_//  _ _ \  \     __  /  \____//
+ /  __    \  /     \ \_   _//_\___     _/    //           \___/  \/     __/
+ __/_______\________\__\_/________\_ _/_____/_____________/_______\____/_______
+                                   /|\
+                                  / | \
+                                 /  |  \
+                                /   |   \
+                               /    |    \
+                              /     |     \
+                             /      |      \
+                            /       |       \
+                           /        |        \
+                          /         |         \
+</pre>
+</div>
+
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a3')">Copy</button>
+<pre id="a3">
+@             _________
+ \____       /         \
+ /    \     /   ____    \
+ \_    \   /   /    \    \
+   \    \ (    \__/  )    )
+    \    \_\ \______/    /
+     \      \           /___
+      \______\_________/____"-_
+</pre>
+</div>
+
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a4')">Copy</button>
+<pre id="a4">
+                                |
+                                |
+                               _|_
+                              /___\
+                             /_____\
+\___________________________\       /___________________________/
+  -----------|------|--------\_____/--------|------|-----------'
+            ( )    ( )     O|OOo|oOO|O     ( )    ( )
+</pre>
+</div>
+
+<div class="ascii-block">
+<button class="copy-btn" onclick="copyAscii('a5')">Copy</button>
+<pre id="a5">
+               .
+              /=\\
+             /===\ \
+            /=====\' \
+           /=======\'' \
+          /=========\ ' '\
+         /===========\''   \
+        /=============\ ' '  \
+       /===============\   ''  \
+      /=================\' ' ' ' \
+     /===================\' ' '  ' \
+    /=====================\' '   ' ' \
+   /=======================\  '   ' /
+  /=========================\   ' /
+ /===========================\'  /
+/=============================\/
+</pre>
+</div>
+
 </section>
 
 <section id="settings" class="hidden">
