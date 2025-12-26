@@ -1,328 +1,224 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="uk">
 <head>
-<meta charset="UTF-8">
-<title>Street0 Code</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="favicon.ico">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Raws Hub</title>
+  <meta name="description" content="Raws Hub — your hub for projects, links, and updates." />
 
-<style>
-:root {
-  --bg: #0b0b0b;
-  --bg-soft: #0f0f0f;
-  --panel: rgba(20,20,20,0.9);
-  --border: rgba(255,255,255,0.08);
-  --text: #eaeaea;
-  --muted: #9a9a9a;
-  --accent: #7dd3fc;
-}
+  <style>
+    :root{
+      --bg:#0b0d12;
+      --panel:#111522;
+      --panel2:#0f1320;
+      --text:#e8ebff;
+      --muted:#a9b0d6;
+      --stroke:rgba(255,255,255,.08);
+      --glow:rgba(120,160,255,.18);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background:
+        radial-gradient(900px 500px at 20% 10%, rgba(120,160,255,.14), transparent 55%),
+        radial-gradient(900px 500px at 80% 0%, rgba(255,120,200,.10), transparent 50%),
+        radial-gradient(900px 500px at 50% 120%, rgba(120,255,200,.08), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 60px}
 
-body.light {
-  --bg: #f3f4f6;
-  --bg-soft: #ffffff;
-  --panel: rgba(255,255,255,0.9);
-  --border: rgba(0,0,0,0.1);
-  --text: #111;
-  --muted: #555;
-  --accent: #2563eb;
-}
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border:1px solid var(--stroke);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.03), 0 20px 60px rgba(0,0,0,.45);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.25), transparent 55%),
+                  linear-gradient(135deg, rgba(120,160,255,.95), rgba(255,120,200,.75));
+      box-shadow: 0 12px 30px var(--glow);
+      border:1px solid rgba(255,255,255,.18);
+    }
+    nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .pill{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-weight:600;
+      transition:.18s;
+    }
+    .pill:hover{transform:translateY(-1px); color:var(--text); border-color:rgba(255,255,255,.16)}
 
-* {
-  box-sizing: border-box;
-}
+    .hero{
+      margin-top:18px;
+      padding:34px 22px;
+      border-radius:var(--radius);
+      border:1px solid var(--stroke);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+      box-shadow: 0 20px 70px rgba(0,0,0,.5);
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height:1.1;
+    }
+    .hero p{margin:0 0 18px; color:var(--muted); max-width:70ch}
+    .cta{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.04);
+      font-weight:700;
+      transition:.18s;
+      cursor:pointer;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{transform:translateY(-1px); border-color:rgba(255,255,255,.18)}
+    .btn.primary{
+      background:linear-gradient(135deg, rgba(120,160,255,.95), rgba(255,120,200,.85));
+      border-color:rgba(255,255,255,.22);
+      color:#0a0b10;
+    }
 
-body {
-  margin: 0;
-  background: linear-gradient(180deg, var(--bg), var(--bg-soft));
-  color: var(--text);
-  font-family: monospace;
-  transition: background 0.6s ease, color 0.4s ease;
-}
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:12px;
+    }
+    .card{
+      grid-column: span 6;
+      padding:16px;
+      border-radius:var(--radius);
+      border:1px solid var(--stroke);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.012));
+      min-height:120px;
+    }
+    .card h3{margin:0 0 6px}
+    .card p{margin:0; color:var(--muted)}
+    .card small{color:rgba(232,235,255,.6)}
+    .card .row{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
 
-/* Sakura background */
-body.sakura::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: url("sakurablured.png") center / cover no-repeat;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  z-index: -1;
-}
-body.sakura-active::before {
-  opacity: 0.25;
-}
+    .footer{
+      margin-top:22px;
+      color:rgba(232,235,255,.55);
+      text-align:center;
+      font-size:14px;
+    }
 
-header {
-  padding: 24px;
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(6px);
-}
-
-h1 {
-  margin: 0;
-  font-size: 22px;
-  letter-spacing: 1px;
-}
-
-nav {
-  margin-top: 14px;
-}
-
-nav button {
-  background: none;
-  border: none;
-  color: var(--muted);
-  margin-right: 20px;
-  cursor: pointer;
-  font-family: monospace;
-  transition: color 0.3s ease;
-}
-
-nav button.active,
-nav button:hover {
-  color: var(--text);
-}
-
-main {
-  padding: 28px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-.hidden {
-  display: none;
-}
-
-section {
-  animation: fadeIn 0.4s ease;
-}
-
-/* ASCII block */
-.ascii-block {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 18px;
-  margin-bottom: 28px;
-  position: relative;
-  backdrop-filter: blur(10px);
-  transition: transform 0.25s ease;
-}
-
-.ascii-block:hover {
-  transform: translateY(-2px);
-}
-
-.ascii-block pre {
-  margin: 0;
-  white-space: pre;
-  overflow-x: auto;
-}
-
-.copy-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  padding: 5px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.copy-btn:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-/* Settings */
-.setting {
-  margin-bottom: 18px;
-}
-
-.setting button {
-  margin-left: 12px;
-  padding: 4px 10px;
-  font-family: monospace;
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.setting button:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
-
-<script>
-function showTab(tab) {
-  document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
-  document.getElementById(tab).classList.remove("hidden");
-
-  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-  document.getElementById("btn-" + tab).classList.add("active");
-}
-
-function copyAscii(id) {
-  navigator.clipboard.writeText(document.getElementById(id).innerText);
-}
-
-function toggleTheme() {
-  document.body.classList.toggle("light");
-  localStorage.theme = document.body.classList.contains("light") ? "light" : "dark";
-}
-
-function toggleSakura() {
-  document.body.classList.toggle("sakura");
-  document.body.classList.toggle("sakura-active");
-  localStorage.sakura = document.body.classList.contains("sakura");
-}
-
-window.onload = () => {
-  if (localStorage.theme === "light") document.body.classList.add("light");
-  if (localStorage.sakura === "true") {
-    document.body.classList.add("sakura","sakura-active");
-  }
-};
-</script>
+    @media (max-width: 860px){
+      .card{grid-column: span 12;}
+      header{align-items:flex-start; flex-direction:column}
+      nav{justify-content:flex-start}
+    }
+  </style>
 </head>
 
 <body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-size:16px">Raws Hub</div>
+          <div style="font-size:12px; color:var(--muted)">links • projects • updates</div>
+        </div>
+      </div>
 
-<header>
-  <h1>Street0 Code</h1>
-  <nav>
-    <button id="btn-ascii" class="active" onclick="showTab('ascii')">ASCII</button>
-    <button id="btn-settings" onclick="showTab('settings')">Settings</button>
-  </nav>
-</header>
+      <nav>
+        <a class="pill" href="#projects">Проєкти</a>
+        <a class="pill" href="#links">Лінки</a>
+        <a class="pill" href="#discord">Discord</a>
+        <a class="pill" href="#contact">Контакт</a>
+      </nav>
+    </header>
 
-<main>
+    <section class="hero">
+      <h1>Raws Hub</h1>
+      <p>
+        Один хаб, щоб зібрати все: релізи, утиліти, посилання, і “шо нового”.
+        Тут може бути твоє меню, твої проєкти й твій стиль 😈
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">🚀 Дивитись проєкти</a>
+        <a class="btn" href="#discord">💬 Discord</a>
+        <a class="btn" href="#links">🔗 Лінки</a>
+      </div>
+    </section>
 
-<section id="ascii">
+    <section id="projects" class="grid" aria-label="Projects">
+      <div class="card">
+        <h3>Проєкт #1</h3>
+        <p>Короткий опис. Що це таке і чому воно “кайф”.</p>
+        <div class="row">
+          <a class="btn" href="#" onclick="alert('Постав тут свій лінк 🙂')">🌐 Відкрити</a>
+          <a class="btn" href="#" onclick="alert('GitHub/архів сюди 🙂')">📦 Завантажити</a>
+        </div>
+      </div>
 
-<div class="ascii-block">
-<button class="copy-btn" onclick="copyAscii('a1')">Copy</button>
-<pre id="a1">
-        /\
-       /  \
-       \/\/
-        ~|
-       !~~-!
-       |` ,!
-       |'` |
-       |   |
-       |   |
-       |   |
-       |   |
-       |   |
-_______|___|_______
-\                 /
- \_______________/
-</pre>
-</div>
+      <div class="card">
+        <h3>Проєкт #2</h3>
+        <p>Короткий опис. Можна додати статус: beta / stable / WIP.</p>
+        <div class="row">
+          <span class="btn" style="cursor:default">🧪 beta</span>
+          <span class="btn" style="cursor:default">🕶️ dark</span>
+        </div>
+      </div>
+    </section>
 
-<div class="ascii-block">
-<button class="copy-btn" onclick="copyAscii('a2')">Copy</button>
-<pre id="a2">
-                                                _
-                  ___                          (_)
-                _/XXX\
- _             /XXXXXX\_                                    __
- X\__    __   /X XXXX XX\                          _       /XX\__      ___
-     \__/  \_/__       \ \                       _/X\__   /XX XXX\____/XXX\
-   \  ___   \/  \_      \ \               __   _/      \_/  _/  -   __  -  \__/
-  ___/   \__/   \ \__     \\__           /  \_//  _ _ \  \     __  /  \____//
- /  __    \  /     \ \_   _//_\___     _/    //           \___/  \/     __/
- __/_______\________\__\_/________\_ _/_____/_____________/_______\____/_______
-                                   /|\
-                                  / | \
-                                 /  |  \
-                                /   |   \
-                               /    |    \
-                              /     |     \
-                             /      |      \
-                            /       |       \
-                           /        |        \
-                          /         |         \
-</pre>
-</div>
+    <section id="links" class="grid" aria-label="Links">
+      <div class="card">
+        <h3>Швидкі лінки</h3>
+        <p>Додай свої кнопки: YouTube, TikTok, GitHub, Telegram, що хочеш.</p>
+        <div class="row">
+          <a class="btn" href="#" onclick="alert('Встав свій URL у href')">▶️ YouTube</a>
+          <a class="btn" href="#" onclick="alert('Встав свій URL у href')">🐙 GitHub</a>
+          <a class="btn" href="#" onclick="alert('Встав свій URL у href')">📨 Telegram</a>
+        </div>
+        <small>Порада: заміни # у href на реальні посилання.</small>
+      </div>
 
-<div class="ascii-block">
-<button class="copy-btn" onclick="copyAscii('a3')">Copy</button>
-<pre id="a3">
-@             _________
- \____       /         \
- /    \     /   ____    \
- \_    \   /   /    \    \
-   \    \ (    \__/  )    )
-    \    \_\ \______/    /
-     \      \           /___
-      \______\_________/____"-_
-</pre>
-</div>
+      <div class="card" id="discord">
+        <h3>Discord</h3>
+        <p>Тут можна поставити інвайт на сервер і короткі правила.</p>
+        <div class="row">
+          <a class="btn primary" href="#" onclick="alert('Встав інвайт у href')">✨ Join server</a>
+          <a class="btn" href="#contact">📌 Контакт</a>
+        </div>
+        <small>Хочеш “Server Tag” — треба 3 бусти 😭</small>
+      </div>
+    </section>
 
-<div class="ascii-block">
-<button class="copy-btn" onclick="copyAscii('a4')">Copy</button>
-<pre id="a4">
-                                |
-                                |
-                               _|_
-                              /___\
-                             /_____\
-\___________________________\       /___________________________/
-  -----------|------|--------\_____/--------|------|-----------'
-            ( )    ( )     O|OOo|oOO|O     ( )    ( )
-</pre>
-</div>
+    <section id="contact" class="hero" style="padding:22px">
+      <h2 style="margin:0 0 10px">Контакт</h2>
+      <p style="margin:0; color:var(--muted)">
+        Впиши сюди свій нік, пошту або будь-який контакт. Можна навіть форму додати.
+      </p>
+    </section>
 
-<div class="ascii-block">
-<button class="copy-btn" onclick="copyAscii('a5')">Copy</button>
-<pre id="a5">
-               .
-              /=\\
-             /===\ \
-            /=====\' \
-           /=======\'' \
-          /=========\ ' '\
-         /===========\''   \
-        /=============\ ' '  \
-       /===============\   ''  \
-      /=================\' ' ' ' \
-     /===================\' ' '  ' \
-    /=====================\' '   ' ' \
-   /=======================\  '   ' /
-  /=========================\   ' /
- /===========================\'  /
-/=============================\/
-</pre>
-</div>
-
-</section>
-
-<section id="settings" class="hidden">
-  <div class="setting">
-    Theme:
-    <button onclick="toggleTheme()">Toggle</button>
+    <div class="footer">
+      © <span id="y"></span> Raws Hub — made in the dark vibes.
+    </div>
   </div>
-  <div class="setting">
-    Sakura background:
-    <button onclick="toggleSakura()">On / Off</button>
-  </div>
-</section>
 
-</main>
-
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
